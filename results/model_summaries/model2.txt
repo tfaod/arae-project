@@ -1,0 +1,45 @@
+autoencoder:
+Seq2Seq2Decoder(
+  (embedding): Embedding(30004, 256)
+  (embedding_decoder1): Embedding(30004, 256)
+  (embedding_decoder2): Embedding(30004, 256)
+  (encoder): LSTM(256, 256, batch_first=True)
+  (decoder1): LSTM(512, 256, batch_first=True)
+  (decoder2): LSTM(512, 256, batch_first=True)
+  (linear): Linear(in_features=256, out_features=30004, bias=True)
+)
+
+ gan generator:
+MLP_G(
+  (layer1): Linear(in_features=32, out_features=256, bias=True)
+  (bn1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True)
+  (activation1): ReLU()
+  (layer2): Linear(in_features=256, out_features=256, bias=True)
+  (bn2): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True)
+  (activation2): ReLU()
+  (layer7): Linear(in_features=256, out_features=256, bias=True)
+)
+
+ gan discriminator:
+CNN_D(
+  (conv1): Conv1d(1, 256, kernel_size=(3,), stride=(1,), padding=(1,))
+  (bn1): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True)
+  (conv2): Conv1d(256, 256, kernel_size=(5,), stride=(1,), padding=(2,))
+  (bn2): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True)
+  (conv3): Conv1d(256, 1, kernel_size=(3,), stride=(1,), padding=(1,))
+  (bn3): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True)
+  (GELU): GELU(
+  )
+  (dropout): Dropout(p=0.3)
+  (fc): Linear(in_features=32768, out_features=1, bias=True)
+)
+
+ classifier:
+MLP_Classify(
+  (layer1): Linear(in_features=256, out_features=256, bias=True)
+  (activation1): ReLU()
+  (layer2): Linear(in_features=256, out_features=256, bias=True)
+  (bn2): BatchNorm1d(256, eps=1e-05, momentum=0.1, affine=True)
+  (activation2): ReLU()
+  (layer6): Linear(in_features=256, out_features=1, bias=True)
+)
